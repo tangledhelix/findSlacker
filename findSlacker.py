@@ -9,6 +9,7 @@ import re
 class FindSlacker():
 
     def __init__(self):
+        """Read config file."""
 
         with open('config.json', 'r') as f:
             config = json.load(f)
@@ -16,12 +17,25 @@ class FindSlacker():
         self.api_token = config['api_token']
 
     def process_args(self):
+        """
+        Process command-line arguments.
+
+        This is not done automatically unless calling this module as a script.
+        In library use, create an instance first, then set self.pattern to
+        your search pattern, before calling find_member().
+
+        slack = FindSlacker()
+        slack.pattern = 'smith'
+        slack.find_member()
+        """
         if len(sys.argv) < 2:
             print 'Missing argument, must supply search pattern'
             sys.exit(1)
         self.pattern = sys.argv[1]
 
     def get_member_data(self):
+        """Attempt to retrieve data for a found member."""
+
         try:
             response = requests.get(
                 url=self.url,
@@ -38,6 +52,8 @@ class FindSlacker():
         return member_data['members']
 
     def find_member(self):
+        """Conduct a search and return member data if you find matches."""
+
         members = self.get_member_data()
 
         matches = []
