@@ -58,11 +58,13 @@ class FindSlacker():
                 if member not in matches:
                     matches.append(member)
 
-            if re.search(self.pattern, member['profile']['real_name'], re.IGNORECASE):
+            if re.search(self.pattern, member['profile']['real_name'],
+                         re.IGNORECASE):
                 if member not in matches:
                     matches.append(member)
 
-            if re.search(self.pattern, member['profile']['email'], re.IGNORECASE):
+            if re.search(self.pattern, member['profile']['email'],
+                         re.IGNORECASE):
                 if member not in matches:
                     matches.append(member)
 
@@ -72,6 +74,7 @@ class FindSlacker():
             print '    Email Address: %s' % match['profile']['email']
             print '    Presence:      %s' % match['presence']
             print ''
+
 
 if __name__ == '__main__':
     slack = FindSlacker()
