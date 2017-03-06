@@ -9,7 +9,6 @@ import re
 class FindSlacker():
 
     def __init__(self):
-        self.process_args()
 
         with open('config.json', 'r') as f:
             config = json.load(f)
@@ -78,4 +77,5 @@ class FindSlacker():
 
 if __name__ == '__main__':
     slack = FindSlacker()
+    slack.process_args()
     slack.find_member()
