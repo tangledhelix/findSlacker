@@ -69,6 +69,10 @@ class FindSlacker():
             if member['deleted']:
                 continue
 
+            # Ignore bots
+            if member['is_bot']:
+                continue
+
             if re.search(self.pattern, member['name'], re.IGNORECASE):
                 if member not in matches:
                     matches.append(member)
@@ -78,11 +82,10 @@ class FindSlacker():
                 if member not in matches:
                     matches.append(member)
 
-            if ('email' in member['profile']):
-                if re.search(self.pattern, member['profile']['email'],
-                             re.IGNORECASE):
-                    if member not in matches:
-                        matches.append(member)
+            if re.search(self.pattern, member['profile']['email'],
+                         re.IGNORECASE):
+                if member not in matches:
+                    matches.append(member)
 
         for match in matches:
             print 'User %s:' % match['name']
